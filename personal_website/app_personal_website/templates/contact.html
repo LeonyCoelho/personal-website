@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+  {% block content %}
+  <title>Contato - Leony Coelho</title>
+  <main class="contact-main">
+    <div class="container">
+      <main class="form-contact">
+        <form>
+          <div class="row">
+            <div class="contact-box col-md-8 mx-auto">
+                <h2 class="pb-2 border-bottom">Entre em contato</h2>
+                <form>
+                    <div class="form-group row">
+                        <div class="mb-3 col-sm-12 col-md-6 col-lg-6">
+                            <label hidden>Nome</label>
+                            <input type="text" placeholder="Nome" class="form-control">
+                        </div>
+                        <div class="mb-3 col-6 col-sm-12 col-md-6 col-lg-6">
+                            <label hidden>Email</label>
+                            <input type="Email" placeholder="Email" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label hidden>Titulo</label>
+                            <input type="text" placeholder="Título da mensagem" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label hidden>Mensagem</label>
+                            <textarea placeholder="Sua mensagem" class="form-control user-msg" rows="10"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <button class="btn btn-primary">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </form>
+      </main>
+      
+
+
+  </div>
+  </main>
+  {% endblock %}
