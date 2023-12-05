@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+  {% block content %}
+  <title>Projetos - Leony Coelho</title>
+  <main>
+    <h2>Create Project</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="id_project_title">Título do Projeto:</label>
+      <input type="text" name="project_title" id="id_project_title" required>
+      <br>
+    
+      <label for="id_project_tags">Tags:</label>
+      <input type="text" name="project_tags" id="id_project_tags">
+      <br>
+    
+      <label for="id_project_description">Descrição do Projeto:</label>
+      <input type="text" name="project_description" id="id_project_description">
+      <br>
+    
+      <label for="id_images">Imagens:</label>
+      <input type="file" name="images" id="id_images" multiple>
+      <br>
+    
+      <input type="submit" value="Salvar Projeto">
+    </form>
+  </main>
+{% endblock %}

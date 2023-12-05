@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+  {% block content %}
+  <title>Projetos - Leony Coelho</title>
+  <main>
+   
+  <h1>{{ project.project_title }}</h1>
+  <p>Tags: {{ project.project_tags }}</p>
+  <p>Description: {{ project.project_description }}</p>
+
+  <h2>Imagens</h2>
+  {% for image in project.project_images.all %}
+  <img src="{{ image.project_image.url }}" alt="{{ image.project_image.url }}"><br>
+  {% endfor %}
+  </main>
+  {% endblock %}
