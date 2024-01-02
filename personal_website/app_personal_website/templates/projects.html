@@ -3,23 +3,25 @@
   {% block content %}
   <title>Projetos - Leony Coelho</title>
   <main>
-
-  <h1>Projetos</h1>
+<div class="container">
   <a href="{% url 'new_project' %}">Novo</a>
   <h1>Lista de Projetos</h1>
-    
   {% for project in projects %}
-  <a href="{% url 'project_detail' project.id %}">{{ project.project_title }}</a><br>
-  
-  {% if project.project_images.all %}
-      <img src="{{ project.project_images.all.0.project_image.url }}" alt="{{ project.project_title }} Image"><br>
-  {% endif %}
-
-  {% if project.project_description %}
-      <p>{{ project.project_description|safe|slice:":100" }}</p>
-  {% endif %}
-
-  <hr>  <!-- Apenas para separar visualmente os projetos na lista -->
-{% endfor %}
+  <a href="{% url 'project_detail' project.id %}">
+    <div class="card bg-dark text-white project-card mb-3">
+      {% if project.project_images.all %}
+      <img src="{{ project.project_images.all.0.project_image.url }}" class="card-img project-cover" alt="{{ project.project_title }} Image">
+      {% endif %}
+      <div class="card-img-overlay">
+        <h5 class="card-title">{{ project.project_title }}</h5>
+        {% if project.project_description %}
+        <p class="card-text">{{ project.project_description|safe|slice:":100" }}</p>
+        {% endif %}
+        <p class="card-text">{{ project.project_tags }}</p>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
   </main>
   {% endblock %}

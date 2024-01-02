@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect,  get_object_or_404
+from django.core.mail import send_mail
 from app_personal_website.models import Project, ProjectImage
 
 def homepage(request):
@@ -13,8 +14,28 @@ def project_list(request):
     return render(request, 'projects.html', {'projects': projects})
 
 def contact(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        titulo = request.POST.get('titulo')
+        mensagem = request.POST.get('mensagem')
 
+        # Verifica se está capturando os dados corretamente
+        print(nome, email, titulo, mensagem)
+
+        # Configurar e enviar o email
+        send_mail(
+            f'{titulo} - Enviado por: {nome}',  # Assunto do email
+            f'De: {email}\n\n{mensagem}',  # Corpo da mensagem
+            'seu_email@exemplo.com',  # Email do remetente
+            ['leony.ferreira95@gmail.com'],  # Lista de destinatários
+            fail_silently=False,
+        )
+
+        # Redirecionar após o envio do email
+        return redirect('homepage')
     return render(request, 'contact.html')
+
 
 def admin_panel(request):
     return render(request, 'admin-panel.html')
@@ -38,7 +59,7 @@ def new_project(request):
             project_image.save()
             project.project_images.add(project_image)
 
-        return redirect('projects')  # Substitua 'projects' pelo nome correto da sua URL
+        return redirect('project_list')  # Substitua 'projects' pelo nome correto da sua URL
 
     return render(request, 'new-project.html')
 

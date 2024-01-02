@@ -49,3 +49,16 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
+  .project-card{
+    height: 30rem;
+  }
+
+  .project-cover{
+    height: 30rem;
+    object-fit: cover;
+  }
+
+  .project-image{
+    width: 100%;
+  }
