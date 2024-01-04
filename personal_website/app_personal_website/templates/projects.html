@@ -4,8 +4,7 @@
   <title>Projetos - Leony Coelho</title>
   <main>
 <div class="container">
-  <a href="{% url 'new_project' %}">Novo</a>
-  <h1>Lista de Projetos</h1>
+  <h1 class="yellow-color">Lista de Projetos</h1>
   {% for project in projects %}
   <a href="{% url 'project_detail' project.id %}">
     <div class="card bg-dark text-white project-card mb-3">
@@ -23,5 +22,6 @@
   </a>
   {% endfor %}
 </div>
-  </main>
+</main>
+<a href="{% url 'new_project' %}">Novo</a>
   {% endblock %}

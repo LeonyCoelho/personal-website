@@ -1,8 +1,23 @@
+body{
+  background-color: #04112eff;
+  color: #f5f4f3ff;
+}
+
 .user-msg{
     resize: none;
 }
 
+.yellow-color{  color: #ffd401ff;}
+.pink-color{  color: #E62A88; }
+.white-color{  color: #f5f4f3ff;}
 
+.yellow-bg{  background-color: #ffd401ff;}
+.pink-bg{  background-color: #E62A88;}
+.white-bg{  background-color: #f5f4f3ff;}
+
+.yellow-out{  border-color: #ffd401ff;}
+.pink-out{  border-color: #E62A88;}
+.white-out{  border-color: #f5f4f3ff;}
 
 .contact-box{
     width: 100%;
@@ -21,7 +36,6 @@
     align-items: center;
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: #f5f5f5;
   }
 
 .form-contact {
@@ -48,6 +62,10 @@
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+  .form-control{
+    background-color: #34344b;
   }
 
   .project-card{
