@@ -77,6 +77,13 @@ body{
     object-fit: cover;
   }
 
+  .project-cover-home{
+    background-size: 30rem;
+    background-position: center;
+    object-fit: cover;
+  }
+
+
   .project-image{
     width: 100%;
   }

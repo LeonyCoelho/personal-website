@@ -3,7 +3,8 @@ from django.core.mail import send_mail
 from app_personal_website.models import Project, ProjectImage
 
 def homepage(request):
-    return render(request, 'homepage.html')
+    projects = Project.objects.all()
+    return render(request, 'homepage.html', {'projects': projects})
 
 def about(request):
 

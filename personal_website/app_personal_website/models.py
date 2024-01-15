@@ -11,4 +11,6 @@ class Project(models.Model):
     project_tags = models.CharField(max_length=100, blank=True, null=True)
     project_images = models.ManyToManyField(ProjectImage)
     project_description = models.CharField(max_length=200, null=True)
+    at_home = models.BooleanField(default=False)
+    order = models.IntegerField(null=True)
 
