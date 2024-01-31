@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('admin_panel/new_project', views.new_project, name='new_project'),
     path('admin_panel/edit_project', views.edit_project, name='edit_project'),
-    path('admin_panel/delete_project', views.delete_project, name='delete_project'),
+    path('admin_panel/remove_project/<int:project_id>/', views.remove_project, name='remove_project'),
 
     path('',views.homepage, name='homepage'),
     path('about/',views.about, name='about'),

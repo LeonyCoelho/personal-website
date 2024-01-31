@@ -6,7 +6,9 @@
    
     <div class="container">
       <h1>{{ project.project_title }}</h1>
-      <p>Tipo de Projeto: {{ project.project_tags }}</p>  
+      {% for tag in project.project_tags.all %}
+        <p class="card-text">{{ tag.tag_name }}</p>
+      {% endfor %} 
       {% for image in project.project_images.all %}
       <img class="project-image w-100" src="{{ image.project_image.url }}" alt="{{ image.project_image.url }}"><br>
       {% endfor %}

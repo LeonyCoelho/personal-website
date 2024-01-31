@@ -7,17 +7,22 @@ body{
     resize: none;
 }
 
-.yellow-color{  color: #ffd401ff;}
-.pink-color{  color: #E62A88; }
-.white-color{  color: #f5f4f3ff;}
+.yellow-color{  color: #ffd401ff!important;}
+.pink-color{  color: #E62A88!important; }
+.white-color{  color: #f5f4f3ff!important;}
 
-.yellow-bg{  background-color: #ffd401ff;}
-.pink-bg{  background-color: #E62A88;}
-.white-bg{  background-color: #f5f4f3ff;}
+.yellow-bg{  background-color: #ffd401ff!important;}
+.pink-bg{  background-color: #E62A88!important;}
+.white-bg{  background-color: #f5f4f3ff!important;}
 
-.yellow-out{  border-color: #ffd401ff;}
-.pink-out{  border-color: #E62A88;}
-.white-out{  border-color: #f5f4f3ff;}
+.yellow-out{  border-color: #ffd401ff!important;}
+.pink-out{  border-color: #E62A88!important;}
+.white-out{  border-color: #f5f4f3ff!important;}
+
+.no-outline{
+  outline: 0px!important;
+  box-shadow: none!important;
+}
 
 .contact-box{
     width: 100%;

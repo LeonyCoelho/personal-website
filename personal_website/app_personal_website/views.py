@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect,  get_object_or_404
 from django.core.mail import send_mail
-from app_personal_website.models import Project, ProjectImage
+from app_personal_website.models import Project, ProjectImage, Tags
 
 def homepage(request):
     projects = Project.objects.all()
@@ -39,20 +39,27 @@ def contact(request):
 
 
 def admin_panel(request):
-    return render(request, 'admin-panel.html')
+    projects = Project.objects.all()
+    return render(request, 'admin-panel.html', {'projects':projects})
 
 def new_project(request):
     if request.method == 'POST':
         project_title = request.POST.get('project_title')
-        project_tags = request.POST.get('project_tags')
+        project_tags_input = request.POST.get('project_tags')  # Assume que project_tags é uma string de tags separadas por vírgulas
         project_description = request.POST.get('project_description')
 
         # Crie um novo projeto
         project = Project.objects.create(
             project_title=project_title,
-            project_tags=project_tags,
             project_description=project_description
         )
+
+        # Processar as tags
+        tag_names = project_tags_input.split(',')  # Separa as tags em uma lista
+        for tag_name in tag_names:
+            tag_name = tag_name.strip()  # Remove espaços em branco extras
+            tag, created = Tags.objects.get_or_create(tag_name=tag_name)
+            project.project_tags.add(tag)
 
         # Processar as imagens
         for image in request.FILES.getlist('images'):
@@ -60,9 +67,16 @@ def new_project(request):
             project_image.save()
             project.project_images.add(project_image)
 
+        project.save()  # Salva o projeto no banco de dados
+
         return redirect('project_list')  # Substitua 'projects' pelo nome correto da sua URL
 
     return render(request, 'new-project.html')
+
+def remove_project(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    project.delete()
+    return redirect('admin_panel')
 
 
 def project_detail(request, project_id):
@@ -72,6 +86,3 @@ def project_detail(request, project_id):
 
 def edit_project(request):
     return render(request, 'edit-project.html')
-
-def delete_project(request):
-    return render(request, 'delete-project.html')

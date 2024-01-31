@@ -5,6 +5,10 @@
   <main>
     <div class="container">
       <h1>ADMIN PANEL</h1>
+      <a href="{% url 'new_project' %}">Novo Projeto</a>
+      {% for project in projects %}
+      <p> {{project.project_title}} - <a href="{% url 'remove_project' project.id %}">Remove</a></p>
+      {% endfor %}
     </div>
   </main>
   {% endblock %}

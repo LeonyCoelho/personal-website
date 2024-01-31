@@ -4,24 +4,93 @@
   <title>Projetos - Leony Coelho</title>
   <main>
 <div class="container">
-  <h1 class="yellow-color">Lista de Projetos</h1>
-  {% for project in projects %}
-  <a href="{% url 'project_detail' project.id %}">
-    <div class="card bg-dark text-white project-card mb-3">
-      {% if project.project_images.all %}
-      <img src="{{ project.project_images.all.0.project_image.url }}" class="card-img project-cover" alt="{{ project.project_title }} Image">
-      {% endif %}
-      <div class="card-img-overlay">
-        <h5 class="card-title">{{ project.project_title }}</h5>
-        {% if project.project_description %}
-        <p class="card-text">{{ project.project_description|safe|slice:":100" }}</p>
-        {% endif %}
-        <p class="card-text">{{ project.project_tags }}</p>
-      </div>
+  <div class="row">
+    <div class="col-8">
+      <h1 class="yellow-color">Lista de Projetos</h1>
     </div>
-  </a>
+    <div class="col-4">
+          <div class="btn-group end-0 d-flex justify-content-end" role="group" aria-label="Tags">
+            {% for project in projects %}
+              {% for tag in project.project_tags.all %}
+                <button type="button" class="btn pink-out text-white no-outline" aria-current="page" href="#" data-tag="{{ tag.tag_name }}">{{ tag.tag_name }}</button>
+              {% endfor %}
+            {% endfor %}
+          </div>
+    </div>
+  </div>
+  
+  
+  {% for project in projects %}
+    <a href="{% url 'project_detail' project.id %}">
+      <div class="card bg-dark text-white project-card mb-3">
+        {% if project.project_images.all %}
+          <img src="{{ project.project_images.all.0.project_image.url }}" class="card-img project-cover" alt="{{ project.project_title }} Image">
+        {% endif %}
+        <div class="card-img-overlay">
+          <h5 class="card-title">{{ project.project_title }}</h5>
+          {% if project.project_description %}
+            <p class="card-text">{{ project.project_description|safe|slice:":100" }}</p>
+          {% endif %}
+          {% for tag in project.project_tags.all %}
+            <p class="card-text">{{ tag.tag_name }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </a>
   {% endfor %}
 </div>
 </main>
-<a href="{% url 'new_project' %}">Novo</a>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const tagButtons = document.querySelectorAll(".btn-group button");
+    const projectCards = document.querySelectorAll(".project-card");
+  
+    tagButtons.forEach(function(button) {
+      button.addEventListener("click", function(event) {
+        event.preventDefault();
+  
+        const selectedTag = event.target.dataset.tag;
+  
+        // Desselecionar todos os botões e ocultar todos os projetos
+        resetSelection();
+  
+        // Filtrar os projetos com base na tag
+        filterProjects(selectedTag);
+  
+        // Adicionar classe 'pink-bg' ao botão selecionado
+        event.target.classList.add("pink-bg");
+      });
+    });
+  
+    function filterProjects(tag) {
+      projectCards.forEach(function(card) {
+        const projectTags = Array.from(card.querySelectorAll(".card-text"));
+  
+        // Verificar se a tag está presente nas tags do projeto
+        const shouldShow = projectTags.some(function(tagElement) {
+          return tagElement.textContent === tag;
+        });
+  
+        // Exibir ou ocultar o projeto com base na filtragem
+        card.style.display = shouldShow ? "block" : "none";
+      });
+    }
+  
+    function resetSelection() {
+      // Desselecionar todos os botões do grupo
+      tagButtons.forEach(function(button) {
+        button.classList.remove("pink-bg");
+      });
+  
+      // Ocultar todos os projetos
+      projectCards.forEach(function(card) {
+        card.style.display = "none";
+      });
+    }
+  });
+</script>
+
+
+
   {% endblock %}

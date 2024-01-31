@@ -65,8 +65,8 @@
           <div class="col">
             <div onclick='location.href="{% url 'project_detail' project.id %}";'   class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg project-cover-home" style="background-image: url('{{ project.project_images.all.0.project_image.url }}');">
               <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ project.id }} - {{ project.project_title }}</h2>
-                <p class="card-text"> {{ project.project_tags }} - Order {{ project.order }} - At Home {{ project.at_home }}</p>
+                <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ project.project_title }}</h2>
+                <p class="card-text">{% for tag in project.project_tags.all %}{{ tag.tag_name }}{% endfor %} - Order {{ project.order }} - At Home {{ project.at_home }}</p>
               </div>
             </div>
           </div>
